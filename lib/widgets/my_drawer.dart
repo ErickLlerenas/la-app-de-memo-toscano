@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:la_app_de_memo_toscano/screens/about.dart';
-import 'package:la_app_de_memo_toscano/screens/administrator.dart';
+import 'package:la_app_de_memo_toscano/screens/administrator/administrator.dart';
 import 'package:la_app_de_memo_toscano/screens/directory.dart';
 import 'package:la_app_de_memo_toscano/screens/emergency_phones.dart';
 import 'package:la_app_de_memo_toscano/screens/events.dart';

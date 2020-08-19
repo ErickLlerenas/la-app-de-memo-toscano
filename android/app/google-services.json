@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "475079623916",
+    "firebase_url": "https://la-app-de-memo-toscano.firebaseio.com",
+    "project_id": "la-app-de-memo-toscano",
+    "storage_bucket": "la-app-de-memo-toscano.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475079623916:android:c671c1a568ed0c671f11c9",
+        "android_client_info": {
+          "package_name": "com.example.la_app_de_memo_toscano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475079623916-emavstff2khmiloer9mt4ejrtc7jf06p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.la_app_de_memo_toscano",
+            "certificate_hash": "5e8557e9275cd091b80649394052791e7e6ed9e7"
+          }
+        },
+        {
+          "client_id": "475079623916-73hj1lp67trahkmqqs5kg3qbcah51kc5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVPu7hVQfFfz4hWoooymXhtK5yKnKNmCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475079623916-73hj1lp67trahkmqqs5kg3qbcah51kc5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
