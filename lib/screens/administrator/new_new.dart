@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
-class NewEvent extends StatelessWidget {
+class NewNew extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final format = DateFormat("yyyy-MM-dd HH:mm");
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +9,7 @@ class NewEvent extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text("Nuevo evento"),
+        title: Text("Nueva noticia"),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -44,36 +41,6 @@ class NewEvent extends StatelessWidget {
                       border: InputBorder.none,
                       hintText: "Título",
                       hintStyle: TextStyle(color: Colors.grey)),
-                ),
-              ),
-              SizedBox(height: 20),
-              Container(
-                color: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: DateTimeField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Fecha",
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                  format: format,
-                  onShowPicker: (context, currentValue) async {
-                    final date = await showDatePicker(
-                        context: context,
-                        firstDate: DateTime(1900),
-                        initialDate: currentValue ?? DateTime.now(),
-                        lastDate: DateTime(2100));
-                    if (date != null) {
-                      final time = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.fromDateTime(
-                            currentValue ?? DateTime.now()),
-                      );
-                      return DateTimeField.combine(date, time);
-                    } else {
-                      return currentValue;
-                    }
-                  },
                 ),
               ),
               SizedBox(height: 20),

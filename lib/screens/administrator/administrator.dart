@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:la_app_de_memo_toscano/screens/administrator/administrator_home.dart';
 import 'package:la_app_de_memo_toscano/widgets/my_drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Administrator extends StatelessWidget {
+class Administrator extends StatefulWidget {
+  @override
+  _AdministratorState createState() => _AdministratorState();
+}
+
+class _AdministratorState extends State<Administrator> {
   final _formKey = GlobalKey<FormState>();
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +35,7 @@ class Administrator extends StatelessWidget {
                     height: 100,
                   ),
                   Text(
-                    "Inicia Sesión",
+                    "¡Hola administrador!",
                     style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 24,
@@ -46,27 +59,15 @@ class Administrator extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 20),
                           child: TextFormField(
+                            controller: myController,
+                            obscureText: true,
                             validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Por favor ingresa el usuario';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Usuario",
-                                hintStyle: TextStyle(color: Colors.grey)),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value.isEmpty) {
+                              if (value.isEmpty)
                                 return 'Por favor ingresa la contraseña';
-                              }
+
+                              if (value != "memoadmin123")
+                                return 'Contaseña incorrecta';
+
                               return null;
                             },
                             decoration: InputDecoration(
@@ -86,16 +87,24 @@ class Administrator extends StatelessWidget {
                       color: Colors.pink[700],
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-                          Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Processing Data')));
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AdministratorHome()));
+                          Firestore.instance
+                              .collection('admin')
+                              .document('${myController.text}')
+                              .get()
+                              .then((value) => {
+                                    if (value.exists)
+                                      {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AdministratorHome()))
+                                      }
+                                  });
                         }
                       },
                       child: Text(
-                        "Iniciar Sesión",
+                        "Ingresar",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
