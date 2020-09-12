@@ -16,17 +16,17 @@ class Store extends StatelessWidget {
                 color: Colors.grey[100],
                 child: ListTile(
                   title:
-                      Text('Maíz', style: TextStyle(color: Colors.grey[800])),
+                      Text('Pétalo D/4', style: TextStyle(color: Colors.grey[800])),
                   leading: Text(
-                    '1)',
+                  '\$10.00',
                     style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                   ),
                 )),
             Container(
                 child: ListTile(
-              title: Text('Frijol', style: TextStyle(color: Colors.grey[800])),
+              title: Text(' 1 KG Azúcar', style: TextStyle(color: Colors.grey[800])),
               leading: Text(
-                '2)',
+                '\$20.00',
                 style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
             )),
@@ -34,36 +34,36 @@ class Store extends StatelessWidget {
                 color: Colors.grey[100],
                 child: ListTile(
                   title:
-                      Text('Arroz', style: TextStyle(color: Colors.grey[800])),
+                      Text('1 KG Frijol Bayo', style: TextStyle(color: Colors.grey[800])),
                   leading: Text(
-                    '3)',
+                    '\$26.00',
                     style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                   ),
                 )),
             Container(
                 child: ListTile(
-              title: Text('Azúcar', style: TextStyle(color: Colors.grey[800])),
+              title: Text('1 KG Frijol Negro', style: TextStyle(color: Colors.grey[800])),
               leading: Text(
-                '4)',
+                '\$26.00',
                 style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
             )),
             Container(
                 color: Colors.grey[100],
                 child: ListTile(
-                  title: Text('Harina de maíz enriquecida',
+                  title: Text('1 KG Arroz',
                       style: TextStyle(color: Colors.grey[800])),
                   leading: Text(
-                    '5)',
+                    '\$16.00',
                     style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                   ),
                 )),
             Container(
                 child: ListTile(
-              title: Text('Aceite vegetal comestible',
+              title: Text('Carpeta de huevos',
                   style: TextStyle(color: Colors.grey[800])),
               leading: Text(
-                '6)',
+                '\$38.00',
                 style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
             )),
@@ -71,60 +71,32 @@ class Store extends StatelessWidget {
                 color: Colors.grey[100],
                 child: ListTile(
                   title:
-                      Text('Atún', style: TextStyle(color: Colors.grey[800])),
+                      Text('1 Litro de Jugo', style: TextStyle(color: Colors.grey[800])),
                   leading: Text(
-                    '7)',
+                    '\$5.00',
                     style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                   ),
                 )),
             Container(
                 child: ListTile(
-              title: Text('Sardina', style: TextStyle(color: Colors.grey[800])),
+              title: Text('Leche D/Bolsa', style: TextStyle(color: Colors.grey[800])),
               leading: Text(
-                '8)',
+                '\$8.00',
                 style: TextStyle(fontSize: 18, color: Colors.grey[700]),
               ),
             )),
             Container(
               color: Colors.grey[100],
               child: ListTile(
-                title: Text('Leche fluida, en polvo y derivado de la leche',
+                title: Text('3 Leches + 1 Jugo',
                     style: TextStyle(color: Colors.grey[800])),
                 leading: Text(
-                  '9)',
+                  '\$27.00',
                   style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                 ),
               ),
             ),
-            Container(
-                child: ListTile(
-              title: Text('Chiles envasados',
-                  style: TextStyle(color: Colors.grey[800])),
-              leading: Text(
-                '10)',
-                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-              ),
-            )),
-            Container(
-              color: Colors.grey[100],
-              child: ListTile(
-                title: Text('Café soluble (con y sin azúcar)',
-                    style: TextStyle(color: Colors.grey[800])),
-                leading: Text(
-                  '11)',
-                  style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-                ),
-              ),
-            ),
-            Container(
-                child: ListTile(
-              title: Text('Sal de mesa',
-                  style: TextStyle(color: Colors.grey[800])),
-              leading: Text(
-                '12)',
-                style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-              ),
-            )),
+
           ],
         ),
       ),

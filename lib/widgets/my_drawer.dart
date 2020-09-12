@@ -4,6 +4,7 @@ import 'package:la_app_de_memo_toscano/screens/administrator/administrator.dart'
 import 'package:la_app_de_memo_toscano/screens/directory.dart';
 import 'package:la_app_de_memo_toscano/screens/emergency_phones.dart';
 import 'package:la_app_de_memo_toscano/screens/events.dart';
+import 'package:la_app_de_memo_toscano/screens/gallery.dart';
 import 'package:la_app_de_memo_toscano/screens/mail.dart';
 import 'package:la_app_de_memo_toscano/screens/news.dart';
 import 'package:la_app_de_memo_toscano/screens/store.dart';
@@ -43,6 +44,16 @@ class MyDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Events()));
+            },
+          ),
+          ListTile(
+            title: Text('Galería'),
+            trailing: Icon(Icons.navigate_next),
+            leading: Icon(Icons.photo),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Gallery()));
             },
           ),
           ListTile(

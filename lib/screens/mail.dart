@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:la_app_de_memo_toscano/widgets/my_drawer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Mail extends StatelessWidget {
+  final Uri _emailLaunchUri =
+      Uri(scheme: 'mailto', path: 'memotoscanooficial@hotmail.com');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,8 +17,7 @@ class Mail extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                    'https://scontent.fgdl5-1.fna.fbcdn.net/v/t1.0-9/117399378_1147041645695771_4314951515317065807_n.jpg?_nc_cat=109&_nc_sid=110474&_nc_eui2=AeGxkS_PjGPJwBCZ7yHZxvv2YDvVfzPmXmVgO9V_M-ZeZeRtTIixYor_1AVpvmm13naDMSe3Eyzjjj3M9Ffv3A3Z&_nc_ohc=-YW7YgIFRB0AX9va0w0&_nc_ht=scontent.fgdl5-1.fna&oh=0f9f264351ee80992aee7a990733dc71&oe=5F5F098E'),
+                child: Image.asset('assets/icon.jpg'),
               ),
               SizedBox(height: 30),
               Text(
@@ -28,13 +31,16 @@ class Mail extends StatelessWidget {
               ButtonTheme(
                 height: 50,
                 minWidth: double.infinity,
-                child: FlatButton(
-                  onPressed: () {},
+                child: FlatButton.icon(
+                  onPressed: () {
+                    launch(_emailLaunchUri.toString());
+                  },
                   color: Colors.pink[800],
-                  child: Text(
+                  label: Text(
                     "Enviar correo",
                     style: TextStyle(color: Colors.white),
                   ),
+                  icon: Icon(Icons.send, color: Colors.white),
                 ),
               )
             ],

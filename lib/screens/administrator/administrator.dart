@@ -32,10 +32,17 @@ class _AdministratorState extends State<Administrator> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 100,
+                    height: 50,
+                  ),
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset('assets/icon.jpg',
+                          height: 200, width: 200)),
+                  SizedBox(
+                    height: 15,
                   ),
                   Text(
-                    "¡Hola administrador!",
+                    "Cuenta de administrador",
                     style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 24,

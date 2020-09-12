@@ -1,19 +1,141 @@
 import 'package:flutter/material.dart';
 import 'package:la_app_de_memo_toscano/screens/administrator/new_new.dart';
 import 'package:la_app_de_memo_toscano/widgets/my_drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:la_app_de_memo_toscano/screens/news-information.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class NewsAdministrator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Administrador")),
-        drawer: MyDrawer(),
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.pink[800],
-            onPressed: () {
+      appBar: AppBar(title: Text("Administrador")),
+      drawer: MyDrawer(),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.pink[800],
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => NewNew()));
+          },
+          child: Icon(Icons.add)),
+      body: StreamBuilder(
+          stream: Firestore.instance.collection('news').snapshots(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) return LinearProgressIndicator();
+            int reverseIndex = snapshot.data.documents.length;
+            return ListView.builder(
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  reverseIndex -= 1;
+                  return _buildItems(
+                      context, snapshot.data.documents[reverseIndex]);
+                });
+          }),
+    );
+  }
+
+  Widget _buildItems(BuildContext context, DocumentSnapshot document) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+        margin: EdgeInsets.all(5),
+        child: InkWell(
+            onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => NewNew()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewsInformation(
+                          image: document['image'],
+                          date: document['date'],
+                          description: document['description'],
+                          title: document['title'])));
             },
-            child: Icon(Icons.add)));
+            onLongPress: () {
+              _showDeleteDialog(context, document.documentID);
+            },
+            child: Card(
+              child: Row(
+                children: [
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: CachedNetworkImage(
+                        imageUrl: "${document['image']}",
+                        placeholder: (context, url) => LinearProgressIndicator(
+                            backgroundColor: Colors.grey[50],
+                            valueColor:
+                                AlwaysStoppedAnimation(Colors.grey[200])),
+                        height: size.width / 2.75,
+                        width: size.width / 2.75,
+                        fit: BoxFit.cover,
+                      )),
+                  Flexible(
+                      child: Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${document['title']}",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.grey[700],
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Fecha de publicación: ${document['date'].toDate().day}/${document['date'].toDate().month}/${document['date'].toDate().year}",
+                                style: TextStyle(color: Colors.grey[700]),
+                              )
+                            ],
+                          )))
+                ],
+              ),
+            )));
+  }
+
+  void _showDeleteDialog(context, document) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            "¿Eliminar noticia?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.grey[700],
+                fontWeight: FontWeight.bold,
+                fontSize: 24),
+          ),
+          content: Text("Esta noticia será eliminada y no podrás recuperarla."),
+          actions: <Widget>[
+            FlatButton(
+              color: Colors.red,
+              child: Text(
+                "Eliminar",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Firestore.instance
+                    .collection('news')
+                    .document(document)
+                    .delete()
+                    .then((value) => {});
+              },
+            ),
+            FlatButton(
+              color: Colors.grey,
+              child: Text(
+                "Cancelar",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

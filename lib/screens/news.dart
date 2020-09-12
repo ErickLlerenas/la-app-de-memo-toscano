@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:la_app_de_memo_toscano/screens/news-information.dart';
 import 'package:la_app_de_memo_toscano/widgets/my_drawer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class News extends StatelessWidget {
   @override
@@ -13,11 +14,14 @@ class News extends StatelessWidget {
       body: StreamBuilder(
           stream: Firestore.instance.collection('news').snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) return Text('Loading...');
+            if (!snapshot.hasData) return LinearProgressIndicator();
+            int reverseIndex = snapshot.data.documents.length;
             return ListView.builder(
                 itemCount: snapshot.data.documents.length,
-                itemBuilder: (context, index) =>
-                    _buildItems(context, snapshot.data.documents[index]));
+                itemBuilder: (context, index) {
+                  reverseIndex -=1;
+                  return _buildItems(context, snapshot.data.documents[reverseIndex]);
+                });
           }),
       drawer: MyDrawer(),
     );
@@ -29,16 +33,26 @@ class News extends StatelessWidget {
         margin: EdgeInsets.all(5),
         child: InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => NewsInformation()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NewsInformation(
+                          image: document['image'],
+                          date: document['date'],
+                          description: document['description'],
+                          title: document['title'])));
             },
             child: Card(
               child: Row(
                 children: [
                   ClipRRect(
                       borderRadius: BorderRadius.circular(5),
-                      child: Image.network(
-                        "${document['image']}",
+                      child: CachedNetworkImage(
+                        imageUrl: "${document['image']}",
+                        placeholder: (context, url) => LinearProgressIndicator(
+                            backgroundColor: Colors.grey[50],
+                            valueColor:
+                                AlwaysStoppedAnimation(Colors.grey[200])),
                         height: size.width / 2.75,
                         width: size.width / 2.75,
                         fit: BoxFit.cover,
@@ -57,7 +71,6 @@ class News extends StatelessWidget {
                                     color: Colors.grey[700],
                                     fontWeight: FontWeight.bold),
                               ),
-                             
                               Text(
                                 "Fecha de publicación: ${document['date'].toDate().day}/${document['date'].toDate().month}/${document['date'].toDate().year}",
                                 style: TextStyle(color: Colors.grey[700]),
