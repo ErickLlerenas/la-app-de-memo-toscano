@@ -26,7 +26,7 @@ class _NewEventState extends State<NewEvent> {
   Future getImage() async {
     try {
       final pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 20);
+          await picker.getImage(source: ImageSource.gallery, imageQuality: 35);
 
       setState(() {
         _image = File(pickedFile.path);

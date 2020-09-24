@@ -60,6 +60,12 @@ flutter:
     - assets/guardia.png
     - assets/fuga.png
     - assets/fuga-de-gas.png
+    - assets/asistencia-social.png
+    - assets/deportista.png
+    - assets/subasta.png
+    - assets/atencion-al-cliente.png
+    - assets/memo_toscano.jpg
+    - assets/mapa.png
 
   #   - images/a_dot_ham.jpeg
 

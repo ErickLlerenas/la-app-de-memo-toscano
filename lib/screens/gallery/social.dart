@@ -4,7 +4,7 @@ import 'package:la_app_de_memo_toscano/screens/gallery-information.dart';
 import 'package:la_app_de_memo_toscano/widgets/my_drawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class Gallery extends StatelessWidget {
+class Social extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,6 @@ class Gallery extends StatelessWidget {
       drawer: MyDrawer(),
     );
   }
-
   Widget _buildItems(BuildContext context, DocumentSnapshot document) {
     Size size = MediaQuery.of(context).size;
     return Center(

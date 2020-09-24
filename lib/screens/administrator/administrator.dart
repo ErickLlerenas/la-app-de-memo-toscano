@@ -72,7 +72,7 @@ class _AdministratorState extends State<Administrator> {
                               if (value.isEmpty)
                                 return 'Por favor ingresa la contraseña';
 
-                              if (value != "memoadmin123")
+                              if (value.toLowerCase() != "memoadmin123")
                                 return 'Contaseña incorrecta';
 
                               return null;
@@ -96,7 +96,7 @@ class _AdministratorState extends State<Administrator> {
                         if (_formKey.currentState.validate()) {
                           Firestore.instance
                               .collection('admin')
-                              .document('${myController.text}')
+                              .document('${myController.text.toLowerCase()}')
                               .get()
                               .then((value) => {
                                     if (value.exists)

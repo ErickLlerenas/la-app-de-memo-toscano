@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class NewGallery extends StatefulWidget {
+  final String type;
+  NewGallery({this.type});
   @override
   _NewGalleryState createState() => _NewGalleryState();
 }
@@ -17,7 +19,7 @@ class _NewGalleryState extends State<NewGallery> {
   Future getImage() async {
     try {
       final pickedFile =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 20);
+          await picker.getImage(source: ImageSource.gallery, imageQuality: 50);
 
       setState(() {
         _image = File(pickedFile.path);
@@ -78,7 +80,7 @@ class _NewGalleryState extends State<NewGallery> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: Text("Nueva foto"),
+        title: widget.type == "gallery" ?Text("Nueva foto social") : widget.type == "gallery_legislative" ? Text("Nueva foto legislativa") : Text("Nueva foto deportiva"),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -99,8 +101,8 @@ class _NewGalleryState extends State<NewGallery> {
                     )
                   : Image.file(_image,
                       fit: BoxFit.cover, height: size.width, width: size.width),
-              SizedBox(height: 20),
-              !loading
+              SizedBox(height: 100),
+              _image!=null ? (!loading
                   ? ButtonTheme(
                       minWidth: size.width,
                       height: 60,
@@ -131,7 +133,7 @@ class _NewGalleryState extends State<NewGallery> {
                                 .getDownloadURL();
 
                             Firestore.instance
-                                .collection('gallery')
+                                .collection('${widget.type}')
                                 .document(DateTime.now().year.toString() +
                                     DateTime.now().month.toString() +
                                     DateTime.now().day.toString() +
@@ -154,7 +156,7 @@ class _NewGalleryState extends State<NewGallery> {
                   : LinearProgressIndicator(
                       minHeight: 60,
                       backgroundColor: Colors.pink[600],
-                      valueColor: AlwaysStoppedAnimation(Colors.pink[800]))
+                      valueColor: AlwaysStoppedAnimation(Colors.pink[800]))):Container()
             ],
           ),
         ),
